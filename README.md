@@ -1,4 +1,5 @@
 # bookshelf
+A simples application to train Vue, Vuetify and Vuex
 
 ## Project setup
 ```
