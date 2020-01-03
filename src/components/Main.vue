@@ -1,6 +1,6 @@
 <template>
   <div class="main-style">
-    <v-card class="mx-auto">
+    <v-card class="mx-auto" elevation="0">
       <v-container>
         <div class="d-flex flex-no-wrap justify-space-between">
           <div>
@@ -12,7 +12,7 @@
               >Start by selecting one of the options.</v-card-subtitle
             >
           </div>
-          <v-avatar class="ma-0" size="175">
+          <v-avatar class="mx-0 my-5" size="150">
             <v-img src="../assets/books.jpg"></v-img>
           </v-avatar>
         </div>
@@ -32,6 +32,6 @@ export default {};
 
 <style>
 .main-style {
-  margin: 2%;
+  margin: 2% 30vh 2% 30vh;
 }
 </style>
