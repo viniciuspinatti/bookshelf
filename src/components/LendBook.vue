@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <p class="headline">LendBook</p>
 </template>
 
 <script>

@@ -17,17 +17,53 @@
           </v-avatar>
         </div>
         <v-card-actions>
-          <v-btn color="green darken-2" text>Add book</v-btn>
-          <v-btn color="blue darken-2" text>Search book</v-btn>
-          <v-btn color="orange darken-2" text>Lend book</v-btn>
+          <v-btn color="green darken-2" text @click="action = 'A'"
+            >Add book</v-btn
+          >
+          <v-btn color="blue darken-2" text @click="action = 'S'"
+            >Search book</v-btn
+          >
+          <v-btn color="orange darken-2" text @click="action = 'L'"
+            >Lend book</v-btn
+          >
         </v-card-actions>
       </v-container>
     </v-card>
+    <component :is="loadOption" />
   </div>
 </template>
 
 <script>
-export default {};
+import AddBook from "./AddBook";
+import SearchBook from "./SearchBook";
+import LendBook from "./LendBook";
+
+export default {
+  components: {
+    AddBook,
+    SearchBook,
+    LendBook
+  },
+  data() {
+    return {
+      action: null
+    };
+  },
+  computed: {
+    loadOption() {
+      switch (this.action) {
+        case "A":
+          return AddBook;
+        case "S":
+          return SearchBook;
+        case "L":
+          return LendBook;
+        default:
+          return null;
+      }
+    }
+  }
+};
 </script>
 
 <style>
