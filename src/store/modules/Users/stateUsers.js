@@ -2,11 +2,11 @@ const state = {
   allUsers: [
     {
       id: 1,
-      name: "Patricia Lewad"
+      name: "Vinícius Pinatti"
     },
     {
       id: 2,
-      name: "Bob Uncle"
+      name: "Douglas"
     }
   ]
 };

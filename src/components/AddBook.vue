@@ -4,28 +4,40 @@
     <v-text-field outlined label="Name" dense v-model="bookName"></v-text-field>
     <v-text-field
       outlined
-      label="Owner"
-      dense
-      v-model="bookOwner"
-    ></v-text-field>
-    <v-text-field
-      outlined
       label="Author"
       dense
       v-model="bookAuthor"
     ></v-text-field>
+    <v-select
+      outlined
+      :items="users"
+      item-text="name"
+      item-value="id"
+      label="Owner"
+      dense
+      v-model="bookOwner"
+    ></v-select>
     <v-file-input
       dense
       accept="image/*"
       outlined
       label="Picture"
-      v-model="bookPicture"
       prepend-icon="mdi-camera"
+      v-model="bookPicture"
+      id="picture"
     ></v-file-input>
-    <v-btn class="mr-2" fab dark large color="green" title="Save">
+    <v-btn
+      class="mr-2"
+      fab
+      dark
+      large
+      color="green"
+      @click="addBook"
+      title="Save"
+    >
       <v-icon dark>mdi-check-bold</v-icon>
     </v-btn>
-    <v-btn class="mx-2" fab dark large title="Clear">
+    <v-btn class="mx-2" fab dark large @click="clear" title="Clear">
       <v-icon dark>mdi-close</v-icon>
     </v-btn>
   </div>
@@ -38,8 +50,57 @@ export default {
       bookName: null,
       bookOwner: null,
       bookAuthor: null,
-      bookPicture: null
+      bookPicture: null,
+      b64: null
     };
+  },
+  computed: {
+    users() {
+      return this.$store.state.Users.allUsers;
+    }
+  },
+  methods: {
+    fileTo64() {
+      return new Promise(resolve => {
+        // Read file content on file loaded event
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          resolve(event.target.result);
+        };
+        // Convert data to base64
+        reader.readAsDataURL(this.bookPicture);
+      });
+    },
+    async imgBase64() {
+      let string64;
+      await this.fileTo64().then(result => {
+        string64 = result;
+      });
+      this.b64 = string64;
+    },
+    addBook() {
+      const book = {
+        name: this.bookName,
+        ownerId: this.bookOwner,
+        author: this.bookAuthor,
+        picture: this.b64,
+        isLend: false
+      };
+      this.$store.commit("Books/ADD_BOOK", book);
+      this.clear();
+    },
+    clear() {
+      this.bookName = null;
+      this.bookOwner = null;
+      this.bookAuthor = null;
+      this.bookPicture = null;
+      this.b64 = null;
+    }
+  },
+  watch: {
+    bookPicture() {
+      this.imgBase64();
+    }
   }
 };
 </script>
