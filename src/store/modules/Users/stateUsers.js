@@ -6,7 +6,7 @@ const state = {
     },
     {
       id: 2,
-      name: "Douglas"
+      name: "Douglas Faria"
     }
   ]
 };

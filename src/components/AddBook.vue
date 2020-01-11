@@ -40,6 +40,9 @@
     <v-btn class="mx-2" fab dark large @click="clear" title="Clear">
       <v-icon dark>mdi-close</v-icon>
     </v-btn>
+    <v-alert dense dismissible type="success" class="my-5" :value="showAlert">
+      The book has been added.
+    </v-alert>
   </div>
 </template>
 
@@ -51,7 +54,8 @@ export default {
       bookOwner: null,
       bookAuthor: null,
       bookPicture: null,
-      b64: null
+      b64: null,
+      showAlert: false
     };
   },
   computed: {
@@ -79,14 +83,17 @@ export default {
       this.b64 = string64;
     },
     addBook() {
-      const book = {
-        name: this.bookName,
-        ownerId: this.bookOwner,
-        author: this.bookAuthor,
-        picture: this.b64,
-        isLend: false
-      };
-      this.$store.commit("Books/ADD_BOOK", book);
+      if (this.bookName && this.bookOwner && this.bookAuthor) {
+        const book = {
+          name: this.bookName,
+          ownerId: this.bookOwner,
+          author: this.bookAuthor,
+          picture: this.b64,
+          isLend: false
+        };
+        this.$store.commit("Books/ADD_BOOK", book);
+        this.showAlert = true;
+      }
       this.clear();
     },
     clear() {
@@ -95,6 +102,7 @@ export default {
       this.bookAuthor = null;
       this.bookPicture = null;
       this.b64 = null;
+      this.showAlert = false;
     }
   },
   watch: {
