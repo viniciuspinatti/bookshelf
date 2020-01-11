@@ -1,5 +1,6 @@
 # bookshelf
-A simples application to train Vue, Vuetify and Vuex
+A simples application to train Vue, Vuetify and Vuex.
+You don't need a database, everything is in front-end.
 
 ## Project setup
 ```
