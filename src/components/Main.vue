@@ -17,15 +17,11 @@
           </v-avatar>
         </div>
         <v-card-actions>
-          <v-btn color="green darken-2" text @click="action = 'A'"
-            >Add book</v-btn
-          >
-          <v-btn color="blue darken-2" text @click="action = 'S'"
-            >Search book</v-btn
-          >
-          <v-btn color="orange darken-2" text @click="action = 'L'"
-            >Lend book</v-btn
-          >
+          <div v-for="btn in actionButtons" :key="btn.actionLetter">
+            <v-btn :color="btn.color" text @click="action = btn.actionLetter">{{
+              btn.text
+            }}</v-btn>
+          </div>
         </v-card-actions>
       </v-container>
     </v-card>
@@ -46,7 +42,12 @@ export default {
   },
   data() {
     return {
-      action: null
+      action: null,
+      actionButtons: [
+        { color: "green darken-2", actionLetter: "A", text: "Add Book" },
+        { color: "blue darken-2", actionLetter: "S", text: "Search Book" },
+        { color: "orange darken-2", actionLetter: "L", text: "Lend Book" }
+      ]
     };
   },
   computed: {

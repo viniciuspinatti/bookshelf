@@ -102,7 +102,6 @@ export default {
       this.bookAuthor = null;
       this.bookPicture = null;
       this.b64 = null;
-      this.showAlert = false;
     }
   },
   watch: {
